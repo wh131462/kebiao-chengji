@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
 		<title>课表和成绩查询</title>
 		<link rel="shortcut icon" href="image/logo.ico">
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
@@ -110,7 +110,6 @@
 						  })
 						  .catch(function(err){
 						  	console.log(err);
-						  	console.log("连接服务器失败，请检测网络或尝试重连.");
 							_this.username="";
 							_this.password="";
 							_this.lghidden=false;

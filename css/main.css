@@ -2,8 +2,8 @@
 body{
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
-	touch-action: cross-slide-y;
+	/* overflow设置为hidden就无法上下滑动了 因为下面的内容也属于超出部分 隐藏了 */
+	overflow:auto;
 	background: linear-gradient(90deg, #00FFFF 0%,#0000DE 100%);
 }
 
@@ -59,6 +59,7 @@ body{
 	color: #EEE;
 	text-shadow: #FFF 1px 1px;
 }
+/* 底部信息 */
 .foot{
 	position:fixed;
 	bottom: 0;
@@ -84,7 +85,9 @@ body{
 	margin: 0 auto;
 }
 #kbTab,#kcTab,#cjTab{
+	width: 100%;
 	background: rgba(255,255,255,0.6);
+	word-break: break-word;
 	padding: 0.225rem;
 	border:rgba(255,255,255,0.6) solid 1px ;
 	border-radius: 5px;
@@ -107,10 +110,7 @@ body{
 	border: rgba(255,255,255,0.6) solid 1px;
 	background:rgba(255,255,255,0.6);
 }
-#kbHead,.kbxxDetailTr,#kcHead,.kcxxDetailTr,#cjHead,.cjDetailTr{
-	width: 100%;
-	margin: 0 auto;
-}
+
 #kbHead th:first-child,
 .kbxxDetailTr td:first-child
 {
@@ -120,8 +120,16 @@ body{
 .kbxxDetailTr td:not(first-child){
 	width:13%;
 }
-/* jd展示优化 */
-#jd{
+/* 无信息时的文字样式 */
+#cjHead{
+	color: #FF3366;
+}
+/* 不及格成绩标红 */
+.NoneOfPeopleCanHelp{
+	color: red;
+}
+/* sj/jd展示优化 放在同一个类中 附加信息类*/
+.extraInfo{
 	margin: 0 auto;
 	text-align: center;
 	border: rgba(255,255,255,0.6) solid 3px;
@@ -131,9 +139,7 @@ body{
 	width: 90%;
 	padding: 0.625rem;
 	margin-top: 15px;
-}
-#cjTab{
-	width: 100%;
+	margin-bottom: 15px;
 }
 /* 加载动画 */
 #loadingBG{

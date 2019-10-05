@@ -3,6 +3,7 @@ body{
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	touch-action: cross-slide-y;
 	background: linear-gradient(90deg, #00FFFF 0%,#0000DE 100%);
 }
 
@@ -111,16 +112,12 @@ body{
 	margin: 0 auto;
 }
 #kbHead th:first-child,
-.kbxxDetailTr td:first-child,
-#kcHead th:first-child,
-.kcxxDetailTr td:first-child
+.kbxxDetailTr td:first-child
 {
 	width:9%;
 }
 #kbHead th:not(first-child),
-.kbxxDetailTr td:not(first-child),
-#kcHead th:not(first-child),
-.kcxxDetailTr td:not(first-child){
+.kbxxDetailTr td:not(first-child){
 	width:13%;
 }
 /* jd展示优化 */
@@ -143,8 +140,8 @@ body{
 	display: block;
 	position: fixed;
 	margin: 0 auto;
-	width: 1000px;
-	height: 1000px;
+	width: 100%;
+	height: 100%;
 	z-index: 3;
 	background:rgba(255,255,255,0.5);
 }

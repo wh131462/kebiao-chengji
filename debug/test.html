@@ -1,3 +1,4 @@
+//测试时放在主目录
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,7 +7,7 @@
 		<title>课表和成绩查询</title>
 		<link rel="shortcut icon" href="image/logo.ico">
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
-		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.min.js"></script>
 	</head>
 	<body>
@@ -84,20 +85,20 @@
 						var password=_this.password;
 						// loading
 						_this.isloading=true;
-						if(username.length!=12){
+						if(false){
 							alert("请输入正确的学号.");
 							_this.password="";
 							_this.username="";
 							// loading
 							_this.isloading=false;
-						}else if(password==""){
+						}else if(false){
 							alert("请输入密码,默认为身份证号后八位.");
 							// loading
 							_this.isloading=false;
 							
 						}else{
 							// getJson();  发送get请求  获取json数据
-						  axios.get('php/action.php?username='+_this.username+"&password="+_this.password)
+						  axios.get("debug/test.php")
 						  .then(function(res){
 						  	_this.json=res.data;
 						  	if(_this.json["returnErr"]){
@@ -203,15 +204,13 @@
 							  cjHead.innerHTML="暂无成绩!";
 						  }else{
 								for(var i=0;i<json["cj"].length/14;i++){
-									
 									if(i==0){
 										  // 表头
 										for(var j=0;j<14;j++){
-											if(j==0||j==1||j==4||j==7||j==12||j==13){
+											if(j==0||j==1||j==4||j==7||j==10||j==12||j==13){
 												//不想输出什么就在上面判断 数组为["学号", "姓名", "学期", "课程名称", "类别", "学分", "平时", "期中", "期末", "总评成绩", "考试性质", "绩点", "课程代码"]
 												  continue;
 											}else{
-												json["cj"][j]=json["cj"][j]=="&nbsp;"?" ":json["cj"][j];
 												var cjH=document.createElement("th");
 												var text=document.createTextNode(json["cj"][j]);
 												cjH.className="cjHead";
@@ -227,20 +226,13 @@
 										  cjTab.appendChild(cjEleDetailTr);
 										  var cjEleDetailTrPar=document.getElementsByClassName("cjDetailTr")[i-1];
 										  for(var j=0;j<14;j++){
-											  if(j==0||j==1||j==4||j==7||j==12||j==13){
+											  if(j==0||j==1||j==4||j==7||j==10||j==12||j==13){
 												  continue;
 											  }else{
-												
 												json["cj"][14*i+j]=json["cj"][14*i+j]=="&nbsp;"?" ":json["cj"][14*i+j];
 												var cjEleDetail=document.createElement("td");
 												var textDetail=document.createTextNode(json["cj"][14*i+j]);
-												// 判断期末成绩不及格
-												if(j==9&&(isNaN(json["cj"][14*i+j])==false&&json["cj"][14*i+j]<60)||(isNaN(json["cj"][14*i+j])&&json["cj"][14*i+j]=="零分卷")){
-													cjEleDetail.classList.add("NoneOfPeopleCanHelp","cjDetail");
-												}else{
-													cjEleDetail.className+="cjDetail";
-												}
-												
+												cjEleDetail.className="cjDetail";
 												cjEleDetail.appendChild(textDetail);
 												cjEleDetailTrPar.appendChild(cjEleDetail);
 											}
@@ -248,6 +240,7 @@
 									  }
 								  }  
 						  }
+			
 						  _this.isloading=false;
 					  },
 					classTime:function(jc){

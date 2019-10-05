@@ -8,6 +8,7 @@ function getHtml($username,$password){
 	// cookie 存放路径
 	$cookie_jar_index=dirname(__FILE__)."/cookie.txt";
 	$mainUrl = "http://172.16.129.117/"; //根url路径, 登录表单所在的path
+	$loginUrl="http://172.16.129.117/index3.aspx";//登陆后页面
 	$kbUrl = "http://172.16.129.117/web_xsxk/xfz_xsxk_xh.aspx"; //课表所在的path　带着session去访问就能拿到课表的html
 	$cjUrl = "http://172.16.129.117/web_cjgl/cx_cj_xh.aspx"; //成绩所在的path　带着session去访问就能拿到成绩的html
 	// 返回数组信息
@@ -33,6 +34,17 @@ function getHtml($username,$password){
 	// 登录状态返回码
 	$loginHttpCode = curl_getinfo($ch,CURLINFO_HTTP_CODE);
 	curl_close($ch);
+	if($loginHttpCode==200){
+		$ch0 = curl_init ();
+		curl_setopt($ch0, CURLOPT_URL, $loginUrl); 
+		curl_setopt($ch0, CURLOPT_TIMEOUT, 200); 
+		curl_setopt($ch0,CURLOPT_NOBODY,0);
+		curl_setopt($ch0, CURLOPT_RETURNTRANSFER,1); 
+		curl_setopt($ch0, CURLOPT_COOKIEFILE, $cookie_jar_index);  
+		$loginSuccessOut=curl_exec($ch0);
+		$loginSuccessHttpCode = curl_getinfo($ch0,CURLINFO_HTTP_CODE);
+		array_push($return,$loginSuccessOut);
+	}
 	// echo "<script>一级页面状态码：console.log(".$httpCode.");</script>";
 	if($loginHttpCode==200){
 		//第二步 带着session 去获取课表HTML和成绩
@@ -71,8 +83,9 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
 	$username=$_GET["username"];
 	$password=$_GET["password"];
 	$res=getHtml($username,$password);
-	$html1=str_get_html($res[0]);
-	$html2=str_get_html($res[1]);
+	$login=str_get_html($res[0]);
+	$html1=str_get_html($res[1]);
+	$html2=str_get_html($res[2]);
 	if($html1===false){
 		 $json=json_encode(["returnErr"=>"账号密码有误或服务器拒绝访问（登录失败）"]);
 		 echo $json;
@@ -82,6 +95,9 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
 	}else{
 		// 返回json原型的大数组
 		$return=[];
+		//姓名 班级
+		$xm="";
+		$sj="";
 		// 课程头
 		$xkalH=[];
 		// 课表头
@@ -90,6 +106,16 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
 		$xkal=[];
 		// 课表
 		$xkkb=[];
+		// 获取姓名
+		foreach($login->find('div[class=left]') as $key=>$value){
+			if($key==0){
+				$xm=substr($value,24,-101);
+			}elseif ($key=1){
+				$sj=substr($value,117,-45);
+			}
+		}
+		$return["xm"]=$xm;
+		$return["sj"]=$sj;
 		// 筛课程头
 		foreach($html1->find('table[id=GVxkall] b') as $key => $value){
 		preg_match("/^<b>.*<\/b>/",$value,$match);
@@ -156,6 +182,9 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
 				array_push($cj,$temp);
 			}else if(preg_match("/^<font color=\"Blue\" size=\"2\">.*<\/font>/",$value,$match)){
 				$temp=substr($match[0],28,-7);
+				array_push($cj,$temp);
+			}else if(preg_match("/^<font color=\"Red\" size=\"2\">.*<\/font>/",$value,$match)){
+				$temp=substr($match[0],27,-7);
 				array_push($cj,$temp);
 			}else{
 				continue;

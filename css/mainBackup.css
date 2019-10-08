@@ -1,0 +1,178 @@
+/* 登录界面样式 */
+body{
+	margin: 0;
+	padding: 0;
+	/* overflow设置为hidden就无法上下滑动了 因为下面的内容也属于超出部分 隐藏了 */
+	overflow:auto;
+	background: linear-gradient(90deg, #00FFFF 0%,#0000DE 100%);
+}
+
+#login{
+	width: 100%;
+}
+#login_detail{
+	width: 80%;
+	/* margin-left:-40%; */
+	border: #336699 solid 1px;
+	border-radius: 5px;
+	background: #336699;
+	padding: 20% 0;
+	margin-left: -40%;
+	margin-top: -50%;
+	top: 50%;
+	left: 50%;
+	font-size: 1.875rem;
+	text-align: center;
+	z-index: -1;
+	position:fixed;
+}
+#login_detail input{
+	margin: .6rem 0;
+	height: 30px;
+	width:80%;
+	border: #FFF solid 1px;
+	border-radius: 2px;
+	font-size: 1.2rem;
+	color: #999;
+}
+
+#login_detail input:focus{
+	box-shadow: #996633 2px 1px;
+	 color: #4f81c7;
+}
+#login_detail button{
+	width: 80%;
+	height: 30px;
+	margin: 0 auto;
+	background: #FFF;
+	color: #4f81c7;
+	border: #FFF solid 1px;
+	border-radius: 5px;
+}
+#login_detail button:hover{
+	background: rgba(255,255,255,0.8);
+	color: #9f81c7;
+}
+#login_title{
+	margin-top: -20%;
+	font-size: 1.5rem;
+	color: #EEE;
+	text-shadow: #FFF 1px 1px;
+}
+/* 底部信息 */
+.foot{
+	position:fixed;
+	bottom: 0;
+	text-align: center;
+	width: 100%;
+	color: #EEE;
+}
+.kbfoot{
+	position: relative;
+	bottom: 0;
+	text-align: center;
+	width: 100%;
+	color: #EEE;
+}
+.foot a,.kbfoot a{
+	text-decoration: none;
+	color: #EEE;
+}
+/* 课表显示 */
+#kb{
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+}
+#kbTab,#kcTab,#cjTab{
+	width: 100%;
+	background: rgba(255,255,255,0.6);
+	word-break: break-word;
+	padding: 0.225rem;
+	border:rgba(255,255,255,0.6) solid 1px ;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 0.675rem !important;
+}
+/* 使两个表产生距离 */
+#kcTab,#cjTab{
+	margin-top: 15px;
+}
+.kbxxHead,.kcxxHead,.cjHead{
+	color:#51BD9E;
+	border: rgba(255,255,255,0.6) solid 1px;
+	background:rgba(255,255,255,0.6);
+}
+
+.kbxxDetail,.kcxxDetail,.cjDetail{
+	/* text-shadow:rgba(36, 230, 246,0.3) 0px 0px 5px; */
+	color:#2EC4B6;/* #30A9DE */
+	border: rgba(255,255,255,0.6) solid 1px;
+	background:rgba(255,255,255,0.6);
+}
+
+#kbHead th:first-child,
+.kbxxDetailTr td:first-child
+{
+	width:9%;
+}
+#kbHead th:not(first-child),
+.kbxxDetailTr td:not(first-child){
+	width:13%;
+}
+/* 无信息时的文字样式 */
+#cjHead{
+	color: #FF3366;
+}
+/* 不及格成绩标红 */
+.NoneOfPeopleCanHelp{
+	color: red;
+}
+/* sj/jd展示优化 放在同一个类中 附加信息类*/
+.extraInfo{
+	margin: 0 auto;
+	text-align: center;
+	border: rgba(255,255,255,0.6) solid 3px;
+	border-radius: 5px;
+	background: rgba(255,255,255,0.4);
+	color: #FFF;
+	width: 90%;
+	padding: 0.625rem;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+/* 加载动画 */
+#loadingBG{
+	display: block;
+	position: fixed;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+	background:rgba(255,255,255,0.5);
+}
+ #loading{
+        display: block;
+		top: 50%;
+		left: 50%;
+		margin-top: -40px;
+		margin-left: -40px;
+		text-align: center;
+		position:fixed;
+		z-index: 3;
+		width:80px;
+		height: 80px;
+        /*animation (动画) :绑定选择器, 4s完成动画 linear(匀速) infinite(循环) */
+        animation: loading 4s linear infinite;
+    }
+	#loading img{
+		width: 100%;
+	}
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

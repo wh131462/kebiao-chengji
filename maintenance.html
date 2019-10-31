@@ -5,25 +5,50 @@
 		<title>维护中...额，不好意思</title>
 		<link rel="shortcut icon" href="image/logo.ico">
 		<style type="text/css">
-			#main{
-				width: 100%;
+			@media screen and (min-device-width:425px) {
+				#main{
+					width: 100%;
+				}
+				#main img{
+					display: block;
+					text-align: center;
+					margin: 0 auto;
+				}
+				#main p{
+					font-family: "youyuan";
+					text-align: center;
+					font-weight: bold;
+					font-size: 1.2rem;
+					color: #2EC4B6;	
+				}
+							
 			}
-			#main img{
-				display: block;
-				text-align: center;
-				margin: 0 auto;
-			}
-			#main p{
-				font-family: "youyuan";
-				text-align: center;
-				font-weight: bold;
-				color: #2EC4B6;	
+			@media screen and (max-device-width:425px) {
+				#main{
+					width: 100%;
+				}
+				#main img{
+					display: block;
+					text-align: center;
+					width: 60%;
+					margin: 0 auto;
+				}
+				#main p{
+					font-family: "youyuan";
+					text-align: center;
+					font-weight: bold;
+					font-size: 2.8rem;
+					color: #2EC4B6;	
+				}			
 			}
 		</style>
 	</head>
 	<body>
 		<div id="main">
 				<!-- 维护时的页面 -->
+			<audio src="music/阿炳%20-%20二泉映月.mp3" autoplay="autoplay" loop="loop" hidden="hidden">
+				当前浏览器不支持audio
+			</audio>
 			<img src="image/maintenance.jpg"  >
 			<p>不好意思，您所访问的应用正在维护中，请过些时候再进行访问......</p>
 		</div>

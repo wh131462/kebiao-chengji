@@ -12,6 +12,7 @@ class YBOpenApi{
     private $_config = array(
         'appid' => '',
         'seckey' => '',
+		'token' => '',
         'backurl' => ''
     );
 
@@ -26,7 +27,6 @@ class YBOpenApi{
         if(self::$mpInstance == NULL) {
             self::$mpInstance = new self();
         }
-        
         return self::$mpInstance;
     }
 
@@ -149,7 +149,6 @@ class YBOpenApi{
         
         return $this->_instance['authorize'];
     }
-    
 }
 
 ?>

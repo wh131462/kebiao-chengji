@@ -289,6 +289,15 @@
 				// method结束
 				}
 			});
+			window.onload=function(){
+				axios.get('php/getToken.php')
+				.then(function(res){
+					alert(res.data);
+				})
+				.catch(function(e){
+					alert("啊哦~遇到错误了。"+e);
+				})
+			}
 		</script>
 	</body>
 </html>

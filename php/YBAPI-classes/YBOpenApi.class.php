@@ -12,7 +12,6 @@ class YBOpenApi{
     private $_config = array(
         'appid' => '',
         'seckey' => '',
-        'token' => '',
         'backurl' => ''
     );
 

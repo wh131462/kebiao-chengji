@@ -7,7 +7,7 @@ require_once("sql.php");
 	if($conn->connect_error){
 		die("连接失败".$conn->connect_error);
 	}
-	echo "<script>console.log('Connect complete.')</script>";
+	// echo "<script>console.log('Connect complete.')</script>";
 /*
 //表结构
 "CREATE TABLE YBS_info(

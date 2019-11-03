@@ -69,6 +69,3 @@
 			</div>
 
 		</div>
-		<script type="text/javascript" src="js/work.js"></script>
-	</body>
-</html>

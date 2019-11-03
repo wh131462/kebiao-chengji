@@ -1,5 +1,8 @@
 <?php
 $token=$_GET["token"]==""?"":$_GET["token"];
+$username=$_GET["username"]==""?"":$_GET["username"];
+$password=$_GET["password"]==""?"":$_GET["password"];
+
 if (isset($token)&&$token){
 		// 获取token成功
 		require("php/YBAPI-classes/yb-globals.inc.php");
@@ -9,26 +12,28 @@ if (isset($token)&&$token){
 		$api = YBOpenApi::getInstance()->init($config['appid'], $config['seckey'], $config['backurl']);
 		$api->bind($token);
 		//获取用户真实信息
-		$info=$api->request('user/verify_me');
+		$info=$api->request('user/me');
 		// 获取到真实信息之后  进行和数据库的比对
 		require_once("php/mysql.php");
-		if
 		$sql="SELECT ybid,stuid,password FROM YBS_info WHERE ybid=\"".$info["yb_userid"]."\";";//查询账号密码
 		$result=mysqli_query($conn,$sql);
 		$res=mysqli_fetch_array($result,MYSQLI_ASSOC);
 		if($res["ybid"]==null){
 			// 第一次登陆 要求输入学号密码
 			require_once("php/add.php");
-			require_once("php/html.php");
-			// 想办法将html中的 password获取到  便完成了php登陆易班的版本
-			echo "<script>vue.</script>";
-			add($info[yb_userid],$info[yb_studentid],$info[password],$info[yb_realname],$info[yb_schoolname],$info[yb_collegename],$info[yb_classname]);
+			include_once("php/html.php");
+			echo "<script type=\"text/javascript\" src=\"js/SubToSelf.js\"></script>";
+			include_once("php/htmlend.php");
+			add($info["yb_userid"],$username,$password);
 		}else{
-			require("php/html.php");
+			include_once("php/html.php");
+			
 			echo "<script>vue.lghidden=true;
 			vue.username=".$res["stuid"].";
 			vue.password=".$res["password"].";
 			vue.login();</script>";
+			echo "<script type=\"text/javascript\" src=\"js/work.js\"></script>";
+			include_once("php/htmlend.php");
 		}
 		closeSql();
 ?>

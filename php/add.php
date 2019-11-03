@@ -10,4 +10,13 @@ function addMem($ybid,$stuid,$password,$name,$school_name,$college_name,$class_n
 		return "Ins Failed.";
 	}
 }
+function add($ybid,$stuid,$password){
+	// 存入数据库  存储数据的简易版本 获取校级权限之后 可以删除此数据
+	$add="INSERT INTO YBS_info (ybid,stuid,password) VALUES('$ybid','$stuid',''$password');";
+	if($conn->query($sql)==TRUE){
+		return "Ins Success.";
+	}else{
+		return "Ins Failed.";
+	}
+}
 ?>

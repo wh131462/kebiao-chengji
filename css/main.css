@@ -167,7 +167,7 @@ body{
 		margin: 0 auto;
 		width: 100%;
 		height: 100%;
-		z-index: 3;
+		z-index: 9;
 		background:rgba(255,255,255,0.5);
 	}
 	 #loading{
@@ -178,7 +178,7 @@ body{
 			margin-left: -40px;
 			text-align: center;
 			position:fixed;
-			z-index: 3;
+			z-index: 9;
 			width:80px;
 			height: 80px;
 	        /*animation (动画) :绑定选择器, 4s完成动画 linear(匀速) infinite(循环) */
@@ -339,7 +339,7 @@ body{
 		margin: 0 auto;
 		width: 100%;
 		height: 100%;
-		z-index: 3;
+		z-index: 9;
 		background:rgba(255,255,255,0.5);
 	}
 	 #loading{
@@ -350,7 +350,7 @@ body{
 			margin-left: -40px;
 			text-align: center;
 			position:fixed;
-			z-index: 3;
+			z-index: 9;
 			width:80px;
 			height: 80px;
 			/*animation (动画) :绑定选择器, 4s完成动画 linear(匀速) infinite(循环) */
@@ -510,7 +510,7 @@ body{
 		margin: 0 auto;
 		width: 100%;
 		height: 100%;
-		z-index: 3;
+		z-index: 9;
 		background:rgba(255,255,255,0.5);
 	}
 	 #loading{
@@ -521,7 +521,7 @@ body{
 			margin-left: -40px;
 			text-align: center;
 			position:fixed;
-			z-index: 3;
+			z-index: 9;
 			width:80px;
 			height: 80px;
 			/*animation (动画) :绑定选择器, 4s完成动画 linear(匀速) infinite(循环) */

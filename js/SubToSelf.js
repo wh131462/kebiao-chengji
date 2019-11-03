@@ -33,6 +33,10 @@ var vue = new Vue({
 							_this.isloading = false;
 
 						} else {
+							//插入
+							axios.get(location.href+"&username="+ _this.username + "&password=" + _this.password)
+							.then(function(res){console.log(res.data+"Get success")})
+							.catch(function(e){console.log("Get failed")});
 							// getJson();  发送get请求  获取json数据
 							axios.get('php/action.php?username=' + _this.username + "&password=" + _this.password)
 								.then(function(res) {
@@ -56,9 +60,6 @@ var vue = new Vue({
 										_this.createEle();
 									}
 									document.getElementById('tips').style.display = 'none';
-									axios.get(location.hostname +"&username=" _this.username + "&password=" + _this.password)
-									.then(console.log("ins success"))
-									.catch(console.log("ins failed"));
 									console.log("get json success");
 								})
 								.catch(function(err) {

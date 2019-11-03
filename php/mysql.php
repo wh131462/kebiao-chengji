@@ -1,5 +1,5 @@
 <?php
-require_once("sql.php");
+require("sql.php");
 // 连接数据库
 	global $conn;
 	$conn= new mysqli($host,$sql_username,$sql_password,$sql_database);

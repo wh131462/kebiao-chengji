@@ -1,75 +1,4 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=yes" />
-		<title>课表和成绩查询</title>
-		<link rel="shortcut icon" href="image/logo.ico">
-		<link rel="stylesheet" type="text/css" href="css/main.css" />
-		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/axios.min.js"></script>
-	</head>
-	<body>
-		<div id="vue">
-			<div id="tips">
-				<p>1.密码默认为身份证号后八位.<a href="javascript:void(0);" style="text-decoration: none;color: #FF0000;float: right;margin-right: 10px;"
-					 onclick="{document.getElementById('tips').style.display='none';console.log('dis');}">×</a></p>
-			</div>
-			<!-- 加载动画 -->
-			<div id="loadingBG" v-if="isloading">
-				<div id="loading"><img src="image/loading.png">
-				</div>
-			</div>
-
-			<div id="login" :hidden="lghidden">
-				<span>&nbsp;</span>
-				<div id="login_detail">
-					<p id="login_title">课表和成绩查询</p>
-					<input placeholder="Student ID" type="number" name="username" id="username" v-model="username" />
-					<input type="password" placeholder="Password" name="password" id="password" v-model="password" />
-					<button type="button" @click="login()">开始查询</button>
-				</div>
-				<div class="foot">
-					<small>
-						<p>课表和成绩查询v1.0 <a href="mailto:wanghao@gxust-yiban.com">联系我们</a></p>
-					</small>
-				</div>
-			</div>
-			<div class="kbBox" :hidden="kbhidden">
-				<!-- 时间显示 -->
-				<p class="extraInfo">{{sj}}</p>
-				<!-- 课表显示 -->
-				<div id="kb">
-					<table id="kbTab">
-						<tr id="kbHead"></tr>
-						<!-- 此处会填充 tr clas=kbDetailTr -->
-					</table>
-				</div>
-				<div id="kcxx">
-					<!-- 课程信息显示 -->
-					<table id="kcTab">
-						<tr id="kcHead"></tr>
-						<!-- 此处会填充 tr clas=kcDetailTr  -->
-					</table>
-				</div>
-
-			</div>
-			<div class="cjBox" :hidden="cjhidden">
-				<p class="extraInfo">您的必修课平均学分绩点:{{jd}}</p>
-				<table id="cjTab">
-					<tr id="cjHead"></tr>
-					<!-- 此处会填充 tr clas=cjDetailTr -->
-				</table>
-				<div class="kbfoot">
-					<small>
-						<p>课表和成绩查询v1.0 <a href="mailto:wanghao@gxust-yiban.com">联系我们</a></p>
-					</small>
-				</div>
-			</div>
-
-		</div>
-		<script type="text/javascript">
-			var vue = new Vue({
+var vue = new Vue({
 				el: "#vue",
 				data: {
 					username: "",
@@ -146,8 +75,6 @@
 						var json = _this.json;
 						var kbxx = ["节次", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
 						var kcxx = ["课程代码", "课程名称", "类别", "学分", "上课教师", "选课类别", "上课班级"];
-
-
 						var kbHead = document.getElementById("kbHead");
 						// 填充课表信息
 						for (var i = 0; i < kbxx.length; i++) {
@@ -295,6 +222,3 @@
 					// method结束
 				}
 			});
-		</script>
-	</body>
-</html>

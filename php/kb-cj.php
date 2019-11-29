@@ -5,7 +5,7 @@ include_once("simple_html_dom.php");
 //获取课表 信息网页  
 function getHtml($username,$password){
 	// cookie 存放路径
-	$cookie_jar_index=dirname(__FILE__)."/cookie.txt";
+	$cookie_jar_index=dirname(__FILE__)."/COOKIE/cookie_".$username.".txt";
 	$mainUrl = "http://172.16.129.117/"; //根url路径, 登录表单所在的path
 	$loginUrl="http://172.16.129.117/index3.aspx";//登陆后页面
 	$kbUrl = "http://172.16.129.117/web_xsxk/xfz_xsxk_xh.aspx"; //课表所在的path　带着session去访问就能拿到课表的html
@@ -71,9 +71,11 @@ function getHtml($username,$password){
 		if($cjHttpCode==200){
 			array_push($return,$cjOut);
 		}
+		//unlink($cookie_jar_index);
 		return $return;
 	}else{
 		// 登录失败
+		//unlink($cookie_jar_index);
 		return false;
 	}
 }
@@ -81,6 +83,11 @@ function getHtml($username,$password){
 function getJson($username,$password){
 	$res=getHtml($username,$password);
 	$login=str_get_html($res[0]);
+	if(!$res[1]){
+		$json=json_encode(["returnErr"=>"登录失败"]);
+		echo $json;
+		return false;
+	}
 	$html1=str_get_html($res[1]);
 	$html2=str_get_html($res[2]);
 	if($html1===false){
@@ -90,6 +97,7 @@ function getJson($username,$password){
 		 $json=json_encode(["returnErr"=>"课表访问失败（登录成功但未获取到数据）"]);
 		 echo $json;
 	}else{
+
 		// 返回json原型的大数组
 		$return=[];
 		//姓名 班级

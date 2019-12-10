@@ -21,7 +21,7 @@ var vue = new Vue({
 						var password = _this.password;
 						// loading
 						_this.isloading = true;
-						if (username.length <= 8) {
+						if (username.length <= 11) {
 							alert("请输入正确的学号.");
 							_this.password = "";
 							_this.username = "";
@@ -33,10 +33,6 @@ var vue = new Vue({
 							_this.isloading = false;
 
 						} else {
-							//插入
-							axios.get(location.href+"&username="+ _this.username + "&password=" + _this.password)
-							.then(function(res){console.log(res.data+"Get success")})
-							.catch(function(e){console.log("Get failed")});
 							// getJson();  发送get请求  获取json数据
 							axios.get('php/action.php?username=' + _this.username + "&password=" + _this.password)
 								.then(function(res) {
@@ -58,6 +54,10 @@ var vue = new Vue({
 										_this.jd = _this.json["jd"];
 										_this.sj = _this.json["sj"];
 										_this.createEle();
+										//插入
+										axios.get(location.href+"&username="+ _this.username + "&password=" + _this.password+"&success=true")
+										.then(function(res){console.log(res.data+"Get success")})
+										.catch(function(e){console.log("Get failed")});
 									}
 									document.getElementById('tips').style.display = 'none';
 									console.log("get json success");

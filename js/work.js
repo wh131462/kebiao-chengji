@@ -21,7 +21,7 @@ var vue = new Vue({
 						var password = _this.password;
 						// loading
 						_this.isloading = true;
-						if (username.length <= 8) {
+						if (username.length <= 11) {
 							alert("请输入正确的学号.");
 							_this.password = "";
 							_this.username = "";

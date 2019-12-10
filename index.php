@@ -37,7 +37,9 @@ if($username!=""){
 				include_once("php/html.php");
 				echo "<script type=\"text/javascript\" src=\"js/SubToSelf.js\"></script>";
 				include_once("php/htmlend.php");
-				
+				if($_GET["success"]==true){
+					add($info["info"]["yb_userid"],$_GET["username"],$_GET["password"]);
+				}
 			}else{
 				include_once("php/html.php");
 				echo "<script type=\"text/javascript\" src=\"js/work.js\"></script>";

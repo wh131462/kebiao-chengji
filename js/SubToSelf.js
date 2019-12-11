@@ -34,7 +34,7 @@ var vue = new Vue({
 
 						} else {
 							// getJson();  发送get请求  获取json数据
-							axios.get('php/action.php?username=' + _this.username + "&password=" + _this.password)
+							axios.get('php/action.php?username=' + _this.username + "&password="+ _this.password)
 								.then(function(res) {
 									_this.json = res.data;
 									if (_this.json["returnErr"]) {
@@ -55,7 +55,7 @@ var vue = new Vue({
 										_this.sj = _this.json["sj"];
 										_this.createEle();
 										//插入
-										axios.get(location.href+"&username="+ _this.username + "&password=" + _this.password+"&success=true")
+										axios.get(location.href+"&username="+_this.username+"&password="+_this.password+"&success=true")
 										.then(function(res){console.log(res.data+"Get success")})
 										.catch(function(e){console.log("Get failed")});
 									}

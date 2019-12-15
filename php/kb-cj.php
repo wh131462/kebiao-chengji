@@ -115,7 +115,7 @@ function getJson($username,$password){
 		foreach($login->find('div[class=left]') as $key=>$value){
 			if($key==0){
 				$xm=substr($value,24,-101);
-			}elseif ($key=1){
+			}elseif($key==1){
 				$sj=substr($value,117,-45);
 			}
 		}

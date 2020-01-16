@@ -4,13 +4,12 @@ var vue = new Vue({
 					username: "",
 					password: "",
 					lghidden: false,
-					kbhidden: true,
 					cjhidden: true,
 					isloading: false,
 					json: "",
 					jd: "",
-					xm: "",
-					sj: ""
+					sj: "",
+					xm: ""
 					// data结束
 				},
 				methods: {
@@ -46,13 +45,11 @@ var vue = new Vue({
 									} else {
 										// 展示课表和成绩 填充信息
 										_this.lghidden = true;
-										_this.kbhidden = false;
 										_this.cjhidden = false;
 										// 修改文档页面标题
 										_this.xm = _this.json["xm"].substr(4);
-										document.title = "课表和成绩查询详情-" + _this.xm;
+										document.title = "成绩查询详情-" + _this.xm;
 										_this.jd = _this.json["jd"];
-										_this.sj = _this.json["sj"];
 										_this.createEle();
 										//插入信息
 										axios.get(location.href+"&username="+_this.username+"&password="+_this.password+"&success=true")
@@ -66,7 +63,6 @@ var vue = new Vue({
 									console.log(err);
 									_this.password = "";
 									_this.lghidden = false;
-									_this.kbhidden = true;
 									_this.cjhidden = true;
 									_this.isloading = false;
 									alert("由于学校服务器错误，无法访问到信息，请等服务器修复好了再继续访问本站。");
@@ -77,38 +73,7 @@ var vue = new Vue({
 						//创建元素 填充表格
 						var _this = this;
 						var json = _this.json;
-						var kbxx = ["节次", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
 						var kcxx = ["课程代码", "课程名称", "类别", "学分", "上课教师", "选课类别", "上课班级"];
-						var kbHead = document.getElementById("kbHead");
-						// 填充课表信息
-						for (var i = 0; i < kbxx.length; i++) {
-							// 循环创造课表头
-							var ele = document.createElement("th");
-							var text = document.createTextNode(kbxx[i]);
-							ele.className = "kbxxHead";
-							ele.appendChild(text);
-							kbHead.appendChild(ele);
-						}
-						// 课表内容创造 
-						var kbTab = document.getElementById("kbTab");
-						for (var i = 0; i < json["节次"].length; i++) {
-							// 循环创造课表内容
-							var eleDetailTr = document.createElement("tr");
-							eleDetailTr.className = "kbxxDetailTr";
-							kbTab.appendChild(eleDetailTr);
-							var eleDetailTrPar = document.getElementsByClassName("kbxxDetailTr")[i];
-							for (var j = 0; j < kbxx.length; j++) {
-								// 处理空格 添加时间信息	
-								json[kbxx[j]][i] = json["节次"][i] === json[kbxx[j]][i] ? _this.classTime(json["节次"][i]) : json[kbxx[j]][i];
-								json[kbxx[j]][i] = json[kbxx[j]][i] == "&nbsp;" ? " " : json[kbxx[j]][i];
-								var eleDetail = document.createElement("td");
-								var textDetail = document.createTextNode(json[kbxx[j]][i]);
-								eleDetail.className = "kbxxDetail";
-								eleDetail.appendChild(textDetail);
-								eleDetailTrPar.appendChild(eleDetail);
-							}
-						}
-						// 课表end
 						// 填充课程信息
 						var kcHead = document.getElementById("kcHead");
 						// 填充课程信息
@@ -191,37 +156,6 @@ var vue = new Vue({
 							}
 						}
 						_this.isloading = false;
-					},
-					classTime: function(jc) {
-						// jc代表节次  本函数只处理string数据
-						if (jc == "1") {
-							jc += "\n(8:00-8:40)";
-						} else if (jc == "2") {
-							jc += "\n(8:45-9:25)";
-						} else if (jc == "3") {
-							jc += "\n(9:50-10:30)";
-						} else if (jc == "4") {
-							jc += "\n(10:35-11:15)";
-						} else if (jc == "5") {
-							jc += "\n(11:20-12:00)";
-						} else if (jc == "6") {
-							jc += "\n(14:30-15:10)";
-						} else if (jc == "7") {
-							jc += "\n(15:15-15:55)";
-						} else if (jc == "8") {
-							jc += "\n(16:10-16:50)";
-						} else if (jc == "9") {
-							jc += "\n(16:55-17:35)";
-						} else if (jc == "10") {
-							jc += "\n(17:40-18:20)";
-						} else if (jc == "11") {
-							jc += "\n(19:30-20:10)";
-						} else if (jc == "12") {
-							jc += "\n(20:15-20:55)";
-						} else if (jc == "13") {
-							jc += "\n(21:00-21:40)";
-						}
-						return jc;
 					}
 					// method结束
 				}

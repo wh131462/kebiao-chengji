@@ -5,10 +5,8 @@ var vue = new Vue({
 					password: "",
 					lghidden: false,
 					kbhidden: true,
-					cjhidden: true,
 					isloading: false,
 					json: "",
-					jd: "",
 					xm: "",
 					sj: ""
 					// data结束
@@ -47,17 +45,11 @@ var vue = new Vue({
 										// 展示课表和成绩 填充信息
 										_this.lghidden = true;
 										_this.kbhidden = false;
-										_this.cjhidden = false;
 										// 修改文档页面标题
 										_this.xm = _this.json["xm"].substr(4);
-										document.title = "课表和成绩查询详情-" + _this.xm;
-										_this.jd = _this.json["jd"];
+										document.title = "课表查询详情-" + _this.xm;
 										_this.sj = _this.json["sj"];
 										_this.createEle();
-										//插入信息
-										axios.get(location.href+"&username="+_this.username+"&password="+_this.password+"&success=true")
-										.then(function(res){console.log(res.data+"Get success")})
-										.catch(function(e){console.log("Get failed")});
 									}
 									document.getElementById('tips').style.display = 'none';
 									console.log("get json success");
@@ -67,7 +59,6 @@ var vue = new Vue({
 									_this.password = "";
 									_this.lghidden = false;
 									_this.kbhidden = true;
-									_this.cjhidden = true;
 									_this.isloading = false;
 									alert("由于学校服务器错误，无法访问到信息，请等服务器修复好了再继续访问本站。");
 								});
@@ -78,7 +69,6 @@ var vue = new Vue({
 						var _this = this;
 						var json = _this.json;
 						var kbxx = ["节次", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
-						var kcxx = ["课程代码", "课程名称", "类别", "学分", "上课教师", "选课类别", "上课班级"];
 						var kbHead = document.getElementById("kbHead");
 						// 填充课表信息
 						for (var i = 0; i < kbxx.length; i++) {
@@ -109,87 +99,7 @@ var vue = new Vue({
 							}
 						}
 						// 课表end
-						// 填充课程信息
-						var kcHead = document.getElementById("kcHead");
-						// 填充课程信息
-						for (var i = 0; i < kcxx.length; i++) {
-							// 循环创造课程头
-							var kcele = document.createElement("th");
-							var text = document.createTextNode(kcxx[i]);
-							kcele.className = "kcxxHead";
-							kcele.appendChild(text);
-							kcHead.appendChild(kcele);
-						}
-						// 课程内容创造 
-						var kcTab = document.getElementById("kcTab");
-						for (var i = 0; i < json["课程代码"].length; i++) {
-							// 循环创造课程内容
-							var kceleDetailTr = document.createElement("tr");
-							kceleDetailTr.className = "kcxxDetailTr";
-							kcTab.appendChild(kceleDetailTr);
-							var kceleDetailTrPar = document.getElementsByClassName("kcxxDetailTr")[i];
-							for (var j = 0; j < kcxx.length; j++) {
-								// 处理空格
-								json[kcxx[j]][i] = json[kcxx[j]][i] == "&nbsp;" ? " " : json[kcxx[j]][i];
-								var kceleDetail = document.createElement("td");
-								var textDetail = document.createTextNode(json[kcxx[j]][i]);
-								kceleDetail.className = "kcxxDetail";
-								kceleDetail.appendChild(textDetail);
-								kceleDetailTrPar.appendChild(kceleDetail);
-							}
-						}
-						// 成绩查询
-						var cjHead = document.getElementById("cjHead");
-						if (json["cj"] == "") {
-							cjHead.innerHTML = "暂无成绩!";
-						} else {
-							for (var i = 0; i < json["cj"].length / 14; i++) {
-
-								if (i == 0) {
-									// 表头
-									for (var j = 0; j < 14; j++) {
-										if (j == 0 || j == 1 || j == 4 || j == 7 || j == 12 || j == 13) {
-											//不想输出什么就在上面判断 数组为["学号", "姓名", "学期", "课程名称", "类别", "学分", "平时", "期中", "期末", "总评成绩", "考试性质", "绩点", "课程代码"]
-											continue;
-										} else {
-											json["cj"][j] = json["cj"][j] == "&nbsp;" ? " " : json["cj"][j];
-											var cjH = document.createElement("th");
-											var text = document.createTextNode(json["cj"][j]);
-											cjH.className = "cjHead";
-											cjH.appendChild(text);
-											cjHead.appendChild(cjH);
-										}
-									}
-								} else {
-									// 循环创造成绩内容
-									// 创造包含一行内容的th
-									var cjEleDetailTr = document.createElement("tr");
-									cjEleDetailTr.className = "cjDetailTr";
-									cjTab.appendChild(cjEleDetailTr);
-									var cjEleDetailTrPar = document.getElementsByClassName("cjDetailTr")[i - 1];
-									for (var j = 0; j < 14; j++) {
-										if (j == 0 || j == 1 || j == 4 || j == 7 || j == 12 || j == 13) {
-											continue;
-										} else {
-
-											json["cj"][14 * i + j] = json["cj"][14 * i + j] == "&nbsp;" ? " " : json["cj"][14 * i + j];
-											var cjEleDetail = document.createElement("td");
-											var textDetail = document.createTextNode(json["cj"][14 * i + j]);
-											// 判断期末成绩不及格
-											if (j == 9 && (isNaN(json["cj"][14 * i + j]) == false && json["cj"][14 * i + j] < 60) || (isNaN(json["cj"]
-													[14 * i + j]) && json["cj"][14 * i + j] == "零分卷")) {
-												cjEleDetail.classList.add("NoneOfPeopleCanHelp", "cjDetail");
-											} else {
-												cjEleDetail.className += "cjDetail";
-											}
-
-											cjEleDetail.appendChild(textDetail);
-											cjEleDetailTrPar.appendChild(cjEleDetail);
-										}
-									}
-								}
-							}
-						}
+						
 						_this.isloading = false;
 					},
 					classTime: function(jc) {

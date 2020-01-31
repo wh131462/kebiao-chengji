@@ -3,6 +3,7 @@ $token=$_GET["token"]==""?"":$_GET["token"];
 $username=$_GET["username"]==null?"":$_GET["username"];
 $password=$_GET["password"]==null?"":$_GET["password"];
 setcookie("type", $_GET["type"], time()+1800);
+// 设置cookie 以确定访问的网页 type有 无(null)/课表(kebiao)/成绩(chengji)
 if($username!=""){
 	//在交互之后存储信息  只有信息正确才会访问到此
 	require_once("php/add.php");

@@ -132,6 +132,31 @@ var vue = new Vue({
 							jc += "\n(21:00-21:40)";
 						}
 						return jc;
+					},
+					reregister:function(){
+						var con=confirm("是否确定要重新绑定学号信息?");
+						if(con){
+							// 确定 执行清除账户信息并重新绑定
+							var formdata=new FormData();
+							formdata.append('ybid',URL);
+							fetch("php/reregister.php",{
+							    method: 'post',
+								body:formdata
+							})
+							.then(function(response){return response.json();})
+							.then(function(res){
+								console.log(res);
+								if(res["return"]=="success"){
+									//重置成功  进入重新绑定
+									location.reload();
+								}else{
+									alert("重置失败.");
+								}
+								})
+							.catch(function(e){console.log(e)})
+						}else{
+							// 取消 无事发生
+						}
 					}
 					// method结束
 				}

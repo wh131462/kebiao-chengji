@@ -12,6 +12,11 @@
 	<body>
 
 		<div id="vue">
+			<!-- 更改绑定信息 重置信息-->
+			<div id="top">
+				<a href="javascript:void(0);" @click="reregister()">更改绑定</a>
+				<a href="https://gxust-yiban.com:10086/index.html">直接查询</a>
+			</div>
 			<div id="tips">
 				<p>1.第一次登陆需要输入学号密码，一般密码默认为身份证号后八位.<a href="javascript:void(0);" style="text-decoration: none;color: #FF0000;float: right;margin-right: 10px;"
 					 onclick="{document.getElementById('tips').style.display='none';console.log('dis');}">×</a></p>

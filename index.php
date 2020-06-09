@@ -18,7 +18,8 @@ if($username!=""){
 	$info=$api->request('user/me');
 	//此时为添加数据库的时刻
 	add($info["info"]["yb_userid"],$username,$password);
-}else{
+}
+else{
 	//第一次访问 到此 如果有存档 则直接用存储信息进行查询 无 则进行输入要求存档
 	if (isset($token)&&$token){
 			$type=$_GET["type"]==null?"":$_GET["type"];
@@ -52,7 +53,8 @@ if($username!=""){
 					include_once("php/htmlend.php");
 				}
 				
-			}else{
+			}
+			else{
 				if($type=="kebiao"){
 					include_once("php/kbhtml.php");
 					echo "<script type=\"text/javascript\" src=\"js/kbwork.js\"></script>";
@@ -80,7 +82,8 @@ if($username!=""){
 				}
 			}
 			closeSql();
-	}else{
+	}
+	else{
 			// 本页面为易班token获取网页 回调地址设置为本页面 可以用来访问获取其他详细信息
 			require_once("php/YBAPI-classes/yb-globals.inc.php");
 			require_once("php/config.php");

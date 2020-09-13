@@ -162,7 +162,7 @@ var vue = new Vue({
 						if(con){
 							// 确定 执行清除账户信息并重新绑定
 							var formdata=new FormData();
-							formdata.append('ybid',URL);
+							formdata.append('username',this.username);
 							fetch("php/reregister.php",{
 							    method: 'post',
 								body:formdata
